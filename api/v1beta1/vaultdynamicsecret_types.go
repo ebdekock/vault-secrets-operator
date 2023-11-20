@@ -69,6 +69,11 @@ type VaultDynamicSecretSpec struct {
 	// +kubebuilder:validation:Type=string
 	// +kubebuilder:validation:Pattern="^([0-9]+(\\.[0-9]+)?(s|m|h))$"
 	RefreshAfter string `json:"refreshAfter,omitempty"`
+	// Delay adds an artifical delay between fetching the secret and writing it to Kubernetes.
+	// This is to cater for services that are eventually consistent
+	// +kubebuilder:default=0
+	// +kubebuilder:validation:Minimum=0
+	Delay int `json:"delay,omitempty"`
 }
 
 // VaultDynamicSecretStatus defines the observed state of VaultDynamicSecret
